@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Portfolio Created Web Application</display-name>
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/</url-pattern>
+  </filter-mapping>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+  </context-param>
+  <resource-ref>
+    <description>mysql Datasource Test</description>
+    <res-ref-name>jdbc.mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>appServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>appServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>get, post 메소드 활용 테스트 예제 서블렛</description>
+    <display-name>HelloServlet</display-name>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.spring.example.javaPack.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/HelloServlet</url-pattern>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description> 유저 생성 서블렛 </description>
+    <display-name>UserCreate</display-name>
+    <servlet-name>UserCreate</servlet-name>
+    <servlet-class>com.spring.example.javaPack.userPack.UserCreate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCreate</servlet-name>
+    <url-pattern>/user/UserCreate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description> 유저 삭제 서블렛</description>
+    <display-name>UserDelete</display-name>
+    <servlet-name>UserDelete</servlet-name>
+    <servlet-class>com.spring.example.javaPack.userPack.UserDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserDelete</servlet-name>
+    <url-pattern>/user/UserDelete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>유저 테이블 레코드 반환</description>
+    <display-name>UserShow</display-name>
+    <servlet-name>UserShow</servlet-name>
+    <servlet-class>com.spring.example.javaPack.userPack.UserShow</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserShow</servlet-name>
+    <url-pattern>/user/userShow</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>아이디, 패스워드 일치 확인. 세션, 쿠키생성 미구현</description>
+    <display-name>UserLoginProcess</display-name>
+    <servlet-name>UserLoginProcess</servlet-name>
+    <servlet-class>com.spring.example.javaPack.userPack.UserLoginProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserLoginProcess</servlet-name>
+    <url-pattern>/user/UserLoginProcess</url-pattern>
+    <url-pattern>/UserLoginProcess</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostDAO</display-name>
+    <servlet-name>PostDAO</servlet-name>
+    <servlet-class>com.spring.example.javaPack.postPack.PostDAO</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostDAO</servlet-name>
+    <url-pattern>/PostDAO</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostCreate</display-name>
+    <servlet-name>PostCreate</servlet-name>
+    <servlet-class>com.spring.example.javaPack.postPack.PostCreate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostCreate</servlet-name>
+    <url-pattern>/PostCreate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostDelete</display-name>
+    <servlet-name>PostDelete</servlet-name>
+    <servlet-class>com.spring.example.javaPack.postPack.PostDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostDelete</servlet-name>
+    <url-pattern>/PostDelete</url-pattern>
+  </servlet-mapping>
+</web-app>
