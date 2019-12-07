@@ -9,9 +9,18 @@ spring, mysql, tomcat7.0으로 만든 웹페이지 구현.
 
 유저 생성시 입력할 수 있는 텍스트 부분은 숫자와 영문, 한글이 입력 가능함
 
+
+
+
+
 구현한 모델링은 MVC를 사용
--사용자가 정보를 입력하고 출력받는부분은 jsp,
--사용자에게 정보를 입력받고 출력하기 위해 DB에 접속하는 부분은 servlet 또는 자바클래스,
--jsp에 매핑되는 부분은 homecontroller,
--servlet에 매핑되는 부분은 web.xml,
--의존성 주입은 pom.xml 에서 구성되어 있음
+
+사용자가 정보를 입력하고 출력받는부분은 jsp,
+
+사용자에게 정보를 입력받고 출력하기 위해 DB에 접속하는 부분은 servlet 또는 자바클래스,
+
+jsp에 매핑되는 부분은 homecontroller,
+
+servlet에 매핑되는 부분은 web.xml,
+
+의존성 주입은 pom.xml 에서 구성되어 있음
