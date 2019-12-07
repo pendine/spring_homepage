@@ -52,6 +52,16 @@ public class UserDelete extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPush(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	
+	private void dbConnect() {
 		try {
         	String dbURL = "jdbc:mysql://localhost:3306/webserver?serverTimezone=UTC";
         	//DB별 관리ID별도 분류
@@ -63,15 +73,11 @@ public class UserDelete extends HttpServlet {
         }catch(Exception e) {
         	e.printStackTrace();
         }
-		
 	}
-
-	/**
-	 * @see HttpServlet#doPush(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		dbConnect();
 		// 나중에 세션과 쿠키를 사용해서 로그인 유저에게 정보를 받을것.
 //		Cookie[] userInfoCookies = request.getCookies();
 //
@@ -112,14 +118,24 @@ public class UserDelete extends HttpServlet {
 				System.out.println("Query Execute");
 
 
-				if (resultRow != -1) {
-					System.out.println("user delete fail");
-					result = "user delete fail";
-				} else {
+				//delete, update, insert 여부 관계없이 
+				//영향받은 레코드의 수는 양수로 나옴
+				//따라서, delete 일 경우 
+				//성공적으로 수행됬다는 결과로 
+				//-1 을 반환한다는것은
+				//틀렸음
+				if (resultRow == 1) {
+					System.out.println(resultRow);
 					System.out.println("user delete success");
 					result = "user delete success";
+				} else {
+					System.out.println("user delete fail <br/> check id/password");
+					
+					result = "user delete fail <br/> check id/password";
 				}
-
+				
+				queryClose();
+				
 			} catch (SQLException e) {
 				queryClose();
 				System.out.println(e);
@@ -128,11 +144,14 @@ public class UserDelete extends HttpServlet {
 				System.out.println(e);
 			}
 		} else {
-			System.out.println("not exist user id / password ");
+			System.out.println("not exist user id / password combination");
+			userId = userId;
+			result = "not exist user id / password combination <br> user delete fail <br/> check id/password";
 		}
-		queryClose();
+
 		request.setAttribute("userId", userId);
 		request.setAttribute("result", result);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("deleteUserResult");
 		dispatcher.forward(request, response);
 

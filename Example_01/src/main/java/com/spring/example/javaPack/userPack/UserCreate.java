@@ -57,6 +57,10 @@ public class UserCreate extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 		
+		
+	}
+	
+	private void dbConnect() {
 		try {
         	String dbURL = "jdbc:mysql://localhost:3306/webserver?serverTimezone=UTC";
         	//DB별 관리ID별도 분류
@@ -77,6 +81,7 @@ public class UserCreate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		dbConnect();
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
@@ -117,7 +122,7 @@ public class UserCreate extends HttpServlet {
 			int effected = pst.executeUpdate();
 			System.out.println("Query Execute");
 			
-			if (effected == 1) {
+			if (effected >= 1) {
 				result = "user create success";
 				System.out.println("user create success");
 			}else {

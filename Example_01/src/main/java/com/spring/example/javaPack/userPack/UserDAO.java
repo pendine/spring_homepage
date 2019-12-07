@@ -54,7 +54,11 @@ public class UserDAO  extends HttpServlet{
 	String SQL = "";
 	
     public UserDAO() {
-        try {
+        
+    }
+    
+    private void dbConnect() {
+    	try {
         	String dbURL = "jdbc:mysql://localhost:3306/webserver?serverTimezone=UTC";
 
         	//서버시간 미설정시 접속오류 발생
@@ -73,8 +77,8 @@ public class UserDAO  extends HttpServlet{
     }
     
     
-    
     public String[] showUserList() {
+    	dbConnect();
     	SQL = "SELECT User_Id FROM auth_User ";
     	ArrayList<String> users = new ArrayList<String>();
     	      	
@@ -116,6 +120,7 @@ public class UserDAO  extends HttpServlet{
      * user not exist = return false
     */
     public boolean userCheck(String user) {
+    	dbConnect();
     	SQL = "SELECT * FROM auth_User WHERE User_Id = ?";
     	
     	user =QueryGadjet.injectionDetect(user);
@@ -153,6 +158,7 @@ public class UserDAO  extends HttpServlet{
      * user id or user pass not correct = return false
     */
     public boolean userCheck(String user, String userPass) {
+    	dbConnect();
     	SQL = "SELECT * FROM auth_User WHERE User_Id = ? AND User_Password = ?";
     	
     	user =QueryGadjet.injectionDetect(user);
@@ -200,6 +206,7 @@ public class UserDAO  extends HttpServlet{
      * error => -2 
      * */
     public int login(String userId, String userPass) {
+    	dbConnect();
     	SQL = "SELECT * FROM auth_User WHERE User_Id = ?";
     	
     	System.out.println("before id : "+userId);
